@@ -17,7 +17,7 @@ export function AboutSection() {
           transition={{ duration: 0.6 }}
         >
           <p className="text-sm tracking-[0.3em] text-gray-400 uppercase mb-2">
-            About Me
+            About ME
           </p>
 
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
