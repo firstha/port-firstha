@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { profile } from "@/data/profile";
 import { SectionShell } from "@/components/layout/SectionShell";
-import { Container } from "@/components/common/Container";
 
 export function AboutSection() {
   return (

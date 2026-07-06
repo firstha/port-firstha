@@ -1,5 +1,4 @@
 import { profile } from "@/data/profile";
-import { contact } from "@/data/contact";
 import {  X as XIcon, Mail, Globe } from "lucide-react";
 
 export function Footer() {

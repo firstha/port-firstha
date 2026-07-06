@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { navigation } from "@/config/navigation";
@@ -51,12 +52,12 @@ export function Header() {
     >
       <Container className="flex items-center justify-between h-16">
         {/* Logo */}
-        <a
+        <Link
           href="/"
           className="text-lg font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent"
         >
           {profile.name.split(" ")[0]}
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
