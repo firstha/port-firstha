@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { profile } from "@/data/profile";
 import { SectionShell } from "@/components/layout/SectionShell";
+import Image from "next/image";
 
 export function AboutSection() {
   return (
@@ -56,23 +57,13 @@ export function AboutSection() {
           className="flex justify-center"
         >
           <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-br from-white/5 to-white/10 flex items-center justify-center">
-            <div className="text-center text-gray-500">
-              <svg
-                className="w-20 h-20 mx-auto mb-2 text-gray-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                />
-              </svg>
-              <p className="text-sm">Photo placeholder</p>
-              <p className="text-xs text-gray-600">Ganti nanti</p>
-            </div>
+            <Image
+              src="/profil.png"
+              alt="Foto Profil"
+              fill // Biar gambarnya otomatis memenuhi div (w-64 h-64)
+              className="object-cover" 
+              priority 
+            />
           </div>
         </motion.div>
 
