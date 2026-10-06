@@ -2,19 +2,19 @@ import type { Profile } from "@/domain/types";
 
 // Global site configuration for metadata/SEO and layout.
 export const site = {
-  name: "Firstha Noven",
+  name: "Firstha Noventia",
   description:
     "Portfolio pribadi Full Stack Web Developer. Membangun aplikasi web menggunakan Laravel, React, Next.js, TypeScript, MySQL, dan Tailwind CSS.",
 
   url: "https://firsthanoven.com",
 
   author: {
-    name: "Firstha Noven",
+    name: "Firstha Noventia",
     role: "Full Stack Web Developer",
   },
 
   keywords: [
-    "Firstha Noven",
+    "Firstha Noventia",
     "portfolio",
     "full stack developer",
     "laravel",
@@ -34,7 +34,7 @@ export const site = {
   },
 
   defaultMetadata: {
-    titleTemplate: `%s | ${"Firstha Noven"}`,
+    titleTemplate: `%s | ${"Firstha Noventia"}`,
   },
 } as const satisfies {
   name: string;
