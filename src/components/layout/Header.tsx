@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -9,8 +9,34 @@ import { profile } from "@/data/profile";
 import { Container } from "@/components/common/Container";
 import { cn } from "@/lib/utils";
 
-// "/" -> "" (atas halaman), "/#about" -> "about"
-const getSectionId = (href: string) => (href === "/" ? "" : href.replace("/#", ""));
+/* ----------------------------- Konstanta ----------------------------- */
+
+const SCROLL_THRESHOLD = 20;      // px sebelum header dianggap "scrolled"
+const ACTIVE_OFFSET = 140;        // px offset deteksi section aktif
+const EASE_OUT_EXPO = [0.22, 1, 0.36, 1] as const;
+const SPRING_PILL = { type: "spring" as const, stiffness: 380, damping: 32 };
+
+/* ------------------------------- Utils ------------------------------- */
+
+/** "/" -> "" (top), "/#about" -> "about" */
+const getSectionId = (href: string) =>
+  href === "/" ? "" : href.replace("/#", "");
+
+/** Cari href section yang sedang aktif berdasarkan posisi scroll */
+function findActiveHref(): string {
+  let current = "/";
+  for (const item of navigation) {
+    const id = getSectionId(item.href);
+    if (!id) continue;
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top <= ACTIVE_OFFSET) {
+      current = item.href;
+    }
+  }
+  return current;
+}
+
+/* ------------------------------ Component ---------------------------- */
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -18,64 +44,69 @@ export function Header() {
   const [activeHref, setActiveHref] = useState("/");
   const reduceMotion = useReducedMotion();
 
-  // Deteksi scroll + section yang sedang aktif
+  /* Scroll listener: update state scrolled + active section */
   useEffect(() => {
     const onScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-
-      let current = "/";
-      for (const item of navigation) {
-        const id = getSectionId(item.href);
-        if (!id) continue;
-        const el = document.getElementById(id);
-        if (el && el.getBoundingClientRect().top <= 140) current = item.href;
-      }
-      setActiveHref(current);
+      setIsScrolled(window.scrollY > SCROLL_THRESHOLD);
+      setActiveHref(findActiveHref());
     };
 
-    onScroll();
+    onScroll(); // inisialisasi awal
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Tutup menu mobile dengan tombol Escape
+  /* Tutup menu mobile dengan tombol Escape */
   useEffect(() => {
     if (!isMobileMenuOpen) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setIsMobileMenuOpen(false);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsMobileMenuOpen(false);
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [isMobileMenuOpen]);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    setIsMobileMenuOpen(false);
+  /* Handler navigasi (desktop + mobile) */
+  const handleNavClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+      e.preventDefault();
+      setIsMobileMenuOpen(false);
 
-    const behavior: ScrollBehavior = reduceMotion ? "auto" : "smooth";
+      const behavior: ScrollBehavior = reduceMotion ? "auto" : "smooth";
 
-    if (href === "/") {
-      window.scrollTo({ top: 0, behavior });
-      return;
-    }
+      if (href === "/") {
+        window.scrollTo({ top: 0, behavior });
+        return;
+      }
 
-    document.getElementById(getSectionId(href))?.scrollIntoView({ behavior });
-  };
+      document
+        .getElementById(getSectionId(href))
+        ?.scrollIntoView({ behavior });
+    },
+    [reduceMotion]
+  );
+
+  /* Class kondisional header (memoized) */
+  const headerClass = useMemo(
+    () =>
+      cn(
+        "flex h-14 items-center justify-between rounded-full border px-5 transition-all duration-300",
+        isScrolled || isMobileMenuOpen
+          ? "border-white/10 bg-black/60 shadow-lg shadow-black/30 backdrop-blur-xl"
+          : "border-transparent bg-transparent"
+      ),
+    [isScrolled, isMobileMenuOpen]
+  );
 
   return (
     <motion.header
       initial={reduceMotion ? false : { y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
       className="fixed inset-x-0 top-0 z-50 pt-3 md:pt-4"
     >
       <Container>
-        <div
-          className={cn(
-            "flex h-14 items-center justify-between rounded-full border px-5 transition-all duration-300",
-            isScrolled || isMobileMenuOpen
-              ? "border-white/10 bg-black/60 shadow-lg shadow-black/30 backdrop-blur-xl"
-              : "border-transparent bg-transparent"
-          )}
-        >
+        <div className={headerClass}>
           {/* Logo */}
           <Link
             href="/"
@@ -90,7 +121,10 @@ export function Header() {
           </Link>
 
           {/* Navigasi desktop */}
-          <nav className="hidden items-center gap-1 md:flex" aria-label="Navigasi utama">
+          <nav
+            className="hidden items-center gap-1 md:flex"
+            aria-label="Navigasi utama"
+          >
             {navigation.map((item) => {
               const isActive = activeHref === item.href;
               return (
@@ -108,7 +142,7 @@ export function Header() {
                     <motion.span
                       layoutId="nav-active-pill"
                       className="absolute inset-0 rounded-full bg-white/10"
-                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                      transition={SPRING_PILL}
                     />
                   )}
                   <span className="relative">{item.label}</span>
@@ -157,7 +191,12 @@ export function Header() {
                     )}
                   >
                     {item.label}
-                    {isActive && <span className="h-1.5 w-1.5 rounded-full bg-indigo-400" />}
+                    {isActive && (
+                      <span
+                        aria-hidden
+                        className="h-1.5 w-1.5 rounded-full bg-indigo-400"
+                      />
+                    )}
                   </a>
                 );
               })}
