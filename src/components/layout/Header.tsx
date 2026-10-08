@@ -11,18 +11,16 @@ import { cn } from "@/lib/utils";
 
 /* ----------------------------- Konstanta ----------------------------- */
 
-const SCROLL_THRESHOLD = 20;      // px sebelum header dianggap "scrolled"
-const ACTIVE_OFFSET = 140;        // px offset deteksi section aktif
+const SCROLL_THRESHOLD = 20;
+const ACTIVE_OFFSET = 140;
 const EASE_OUT_EXPO = [0.22, 1, 0.36, 1] as const;
 const SPRING_PILL = { type: "spring" as const, stiffness: 380, damping: 32 };
 
 /* ------------------------------- Utils ------------------------------- */
 
-/** "/" -> "" (top), "/#about" -> "about" */
 const getSectionId = (href: string) =>
   href === "/" ? "" : href.replace("/#", "");
 
-/** Cari href section yang sedang aktif berdasarkan posisi scroll */
 function findActiveHref(): string {
   let current = "/";
   for (const item of navigation) {
@@ -44,19 +42,16 @@ export function Header() {
   const [activeHref, setActiveHref] = useState("/");
   const reduceMotion = useReducedMotion();
 
-  /* Scroll listener: update state scrolled + active section */
   useEffect(() => {
     const onScroll = () => {
       setIsScrolled(window.scrollY > SCROLL_THRESHOLD);
       setActiveHref(findActiveHref());
     };
-
-    onScroll(); // inisialisasi awal
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* Tutup menu mobile dengan tombol Escape */
   useEffect(() => {
     if (!isMobileMenuOpen) return;
     const onKey = (e: KeyboardEvent) => {
@@ -66,33 +61,34 @@ export function Header() {
     return () => window.removeEventListener("keydown", onKey);
   }, [isMobileMenuOpen]);
 
-  /* Handler navigasi (desktop + mobile) */
   const handleNavClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
       e.preventDefault();
       setIsMobileMenuOpen(false);
-
       const behavior: ScrollBehavior = reduceMotion ? "auto" : "smooth";
-
       if (href === "/") {
         window.scrollTo({ top: 0, behavior });
         return;
       }
-
-      document
-        .getElementById(getSectionId(href))
-        ?.scrollIntoView({ behavior });
+      document.getElementById(getSectionId(href))?.scrollIntoView({ behavior });
     },
     [reduceMotion]
   );
 
-  /* Class kondisional header (memoized) */
+  /* Header wrapper: glassmorphism lembut saat scroll */
   const headerClass = useMemo(
     () =>
       cn(
-        "flex h-14 items-center justify-between rounded-full border px-5 transition-all duration-300",
+        "flex h-14 items-center justify-between rounded-full border px-5",
+        "transition-all duration-500 ease-out",
         isScrolled || isMobileMenuOpen
-          ? "border-white/10 bg-black/60 shadow-lg shadow-black/30 backdrop-blur-xl"
+          ? [
+              // ✨ Glass lembut dengan gradient pastel tipis
+              "border-white/60",
+              "bg-gradient-to-r from-white/80 via-white/70 to-white/80",
+              "backdrop-blur-xl",
+              "shadow-[0_8px_32px_-8px_rgba(99,102,241,0.15)]",
+            ]
           : "border-transparent bg-transparent"
       ),
     [isScrolled, isMobileMenuOpen]
@@ -111,11 +107,11 @@ export function Header() {
           <Link
             href="/"
             onClick={(e) => handleNavClick(e, "/")}
-            className="group flex items-center gap-2 rounded-full text-lg font-semibold tracking-tight text-white outline-none focus-visible:ring-2 focus-visible:ring-indigo-300/70"
+            className="group flex items-center gap-2 rounded-full text-lg font-semibold tracking-tight text-slate-900 outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/70"
           >
             <span
               aria-hidden
-              className="h-2 w-2 rounded-full bg-indigo-400 transition-transform duration-300 group-hover:scale-150"
+              className="h-2.5 w-2.5 rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 shadow-sm shadow-indigo-400/40 transition-transform duration-300 group-hover:scale-125"
             />
             {profile.name.split(" ")[0]}
           </Link>
@@ -134,14 +130,19 @@ export function Header() {
                   onClick={(e) => handleNavClick(e, item.href)}
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "relative rounded-full px-4 py-1.5 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-indigo-300/70",
-                    isActive ? "text-white" : "text-gray-400 hover:text-white"
+                    "relative rounded-full px-4 py-1.5 text-sm font-medium outline-none",
+                    "transition-colors duration-300",
+                    "focus-visible:ring-2 focus-visible:ring-indigo-400/70",
+                    isActive
+                      ? "text-slate-900"
+                      : "text-slate-500 hover:text-slate-900"
                   )}
                 >
                   {isActive && (
                     <motion.span
                       layoutId="nav-active-pill"
-                      className="absolute inset-0 rounded-full bg-white/10"
+                      aria-hidden
+                      className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500/15 via-purple-500/15 to-pink-500/15 ring-1 ring-inset ring-indigo-400/20"
                       transition={SPRING_PILL}
                     />
                   )}
@@ -154,7 +155,7 @@ export function Header() {
           {/* Tombol menu mobile */}
           <button
             onClick={() => setIsMobileMenuOpen((open) => !open)}
-            className="-mr-2 rounded-full p-2 text-gray-300 outline-none transition hover:bg-white/5 hover:text-white focus-visible:ring-2 focus-visible:ring-indigo-300/70 md:hidden"
+            className="-mr-2 rounded-full p-2 text-slate-600 outline-none transition hover:bg-slate-900/5 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-indigo-400/70 md:hidden"
             aria-label={isMobileMenuOpen ? "Tutup menu" : "Buka menu"}
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
@@ -173,7 +174,13 @@ export function Header() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -12, scale: 0.98 }}
               transition={{ duration: 0.2 }}
-              className="mt-2 overflow-hidden rounded-2xl border border-white/10 bg-black/90 p-2 shadow-xl shadow-black/40 backdrop-blur-xl md:hidden"
+              className={cn(
+                "mt-2 overflow-hidden rounded-2xl p-2 md:hidden",
+                "border border-white/60",
+                "bg-gradient-to-br from-white/90 via-white/80 to-white/90",
+                "backdrop-blur-xl",
+                "shadow-[0_12px_40px_-12px_rgba(99,102,241,0.25)]"
+              )}
             >
               {navigation.map((item) => {
                 const isActive = activeHref === item.href;
@@ -184,17 +191,18 @@ export function Header() {
                     onClick={(e) => handleNavClick(e, item.href)}
                     aria-current={isActive ? "page" : undefined}
                     className={cn(
-                      "flex items-center justify-between rounded-xl px-4 py-3 text-base outline-none transition-colors focus-visible:ring-2 focus-visible:ring-indigo-300/70",
+                      "flex items-center justify-between rounded-xl px-4 py-3 text-base font-medium outline-none",
+                      "transition-colors focus-visible:ring-2 focus-visible:ring-indigo-400/70",
                       isActive
-                        ? "bg-white/10 text-white"
-                        : "text-gray-400 hover:bg-white/5 hover:text-white"
+                        ? "bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 text-slate-900"
+                        : "text-slate-500 hover:bg-slate-900/5 hover:text-slate-900"
                     )}
                   >
                     {item.label}
                     {isActive && (
                       <span
                         aria-hidden
-                        className="h-1.5 w-1.5 rounded-full bg-indigo-400"
+                        className="h-1.5 w-1.5 rounded-full bg-gradient-to-br from-indigo-500 to-pink-500"
                       />
                     )}
                   </a>
