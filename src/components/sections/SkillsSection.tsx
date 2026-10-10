@@ -1,3 +1,4 @@
+// src/components/sections/SkillsSection.tsx
 "use client";
 
 import { motion } from "framer-motion";
@@ -6,7 +7,7 @@ import { SectionShell } from "@/components/layout/SectionShell";
 
 export function SkillsSection() {
   return (
-    <SectionShell id="skills">
+    <SectionShell id="skills" className="bg-slate-50/50">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -15,13 +16,13 @@ export function SkillsSection() {
         transition={{ duration: 0.5 }}
         className="text-center max-w-2xl mx-auto mb-16"
       >
-        <p className="text-sm tracking-[0.3em] text-gray-400 uppercase mb-2">
+        <p className="text-xs tracking-[0.3em] text-blue-600 uppercase mb-3 font-semibold">
           My Skills
         </p>
-        <h2 className="text-3xl md:text-4xl font-bold">
+        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
           Tech Stack & Tools
         </h2>
-        <p className="mt-4 text-gray-400">
+        <p className="mt-4 text-slate-500">
           Teknologi yang saya gunakan dalam pengembangan web
         </p>
       </motion.div>
@@ -35,9 +36,9 @@ export function SkillsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: idx * 0.1 }}
-            className="p-6 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm hover:border-white/20 transition"
+            className="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm hover:border-blue-200 hover:shadow-lg hover:shadow-blue-100/50 transition-all duration-300"
           >
-            <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-4">
+            <h3 className="text-xs font-semibold text-blue-600 uppercase tracking-widest mb-4">
               {category.title}
             </h3>
 
@@ -45,7 +46,7 @@ export function SkillsSection() {
               {category.skills.map((skill) => (
                 <span
                   key={skill.name}
-                  className="px-3 py-1.5 text-sm rounded-full border border-white/10 bg-white/5 text-gray-300 hover:border-white/30 transition"
+                  className="px-3 py-1.5 text-sm rounded-full border border-slate-200 bg-slate-50 text-slate-600 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700 transition-colors"
                 >
                   {skill.name}
                 </span>

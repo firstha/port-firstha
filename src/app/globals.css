@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -49,86 +48,84 @@
 }
 
 /* ---------------------------------------------------------------
-   🎨 TEMA PASTEL CANTIK — Light Mode Only
-   Palet: putih → lavender → pink lembut
+   🎨 TEMA BIRU + PUTIH — Minimalis, Elegan, Light Mode Only
+   Palet: putih bersih → biru soft → biru navy
    --------------------------------------------------------------- */
 :root {
-  --background: #fafbff;
-  --foreground: #0f172a;              /* slate-900 */
+  --background: #ffffff;
+  --foreground: #0a1628;              /* navy-950 */
 
   --card: #ffffff;
-  --card-foreground: #0f172a;
+  --card-foreground: #0a1628;
 
   --popover: #ffffff;
-  --popover-foreground: #0f172a;
+  --popover-foreground: #0a1628;
 
-  --primary: #6366f1;                 /* indigo-500 */
+  --primary: #2563eb;                 /* blue-600 */
   --primary-foreground: #ffffff;
 
-  --secondary: #f1f5f9;               /* slate-100 */
-  --secondary-foreground: #0f172a;
+  --secondary: #f0f6ff;               /* blue-50 */
+  --secondary-foreground: #0a1628;
 
-  --muted: #f1f5f9;
+  --muted: #f8fafc;                   /* slate-50 */
   --muted-foreground: #64748b;        /* slate-500 */
 
-  --accent: #e0e7ff;                  /* indigo-100 */
-  --accent-foreground: #3730a3;       /* indigo-800 */
+  --accent: #dbeafe;                  /* blue-100 */
+  --accent-foreground: #1e40af;       /* blue-800 */
 
   --destructive: #ef4444;
   --border: #e2e8f0;                  /* slate-200 */
   --input: #e2e8f0;
-  --ring: #6366f1;
+  --ring: #2563eb;
 
-  --chart-1: #6366f1;
-  --chart-2: #8b5cf6;
-  --chart-3: #ec4899;
-  --chart-4: #f59e0b;
-  --chart-5: #10b981;
+  --chart-1: #2563eb;
+  --chart-2: #3b82f6;
+  --chart-3: #60a5fa;
+  --chart-4: #93c5fd;
+  --chart-5: #bfdbfe;
 
   --radius: 0.75rem;
 
   --sidebar: #ffffff;
-  --sidebar-foreground: #0f172a;
-  --sidebar-primary: #6366f1;
+  --sidebar-foreground: #0a1628;
+  --sidebar-primary: #2563eb;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f1f5f9;
-  --sidebar-accent-foreground: #0f172a;
+  --sidebar-accent: #f0f6ff;
+  --sidebar-accent-foreground: #0a1628;
   --sidebar-border: #e2e8f0;
-  --sidebar-ring: #6366f1;
+  --sidebar-ring: #2563eb;
 
-  color-scheme: light;                /* 🛡️ Force light, tolak auto dark */
+  color-scheme: light;
 }
 
-/* ---------------------------------------------------------------
-   🌙 Dark mode (opsional) — biarkan tetap ada tapi pastel
-   --------------------------------------------------------------- */
+/* Dark mode (opsional) — tetap biru elegan */
 .dark {
-  --background: #0f172a;
+  --background: #0a1628;
   --foreground: #f8fafc;
-  --card: #1e293b;
+  --card: #0f1f3a;
   --card-foreground: #f8fafc;
-  --popover: #1e293b;
+  --popover: #0f1f3a;
   --popover-foreground: #f8fafc;
-  --primary: #a5b4fc;
-  --primary-foreground: #1e1b4b;
-  --secondary: #334155;
+  --primary: #60a5fa;
+  --primary-foreground: #0a1628;
+  --secondary: #1e3a5f;
   --secondary-foreground: #f8fafc;
-  --muted: #334155;
+  --muted: #1e3a5f;
   --muted-foreground: #cbd5e1;
-  --accent: #4338ca;
-  --accent-foreground: #e0e7ff;
+  --accent: #1e40af;
+  --accent-foreground: #dbeafe;
   --destructive: #f87171;
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: #a5b4fc;
-  --sidebar: #1e293b;
+  --ring: #60a5fa;
+  --sidebar: #0f1f3a;
   --sidebar-foreground: #f8fafc;
-  --sidebar-primary: #a5b4fc;
-  --sidebar-primary-foreground: #1e1b4b;
-  --sidebar-accent: #334155;
+  --sidebar-primary: #60a5fa;
+  --sidebar-primary-foreground: #0a1628;
+  --sidebar-accent: #1e3a5f;
   --sidebar-accent-foreground: #f8fafc;
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: #a5b4fc;
+  --sidebar-ring: #60a5fa;
 }
 
 /* ---------------------------------------------------------------
@@ -150,9 +147,9 @@
     @apply text-foreground;
     min-height: 100vh;
     background:
-      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(199, 210, 254, 0.45), transparent),
-      radial-gradient(ellipse 60% 50% at 80% 100%, rgba(251, 207, 232, 0.35), transparent),
-      linear-gradient(180deg, #fafbff 0%, #f5f3ff 50%, #fdf2f8 100%);
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(37, 99, 235, 0.08), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(59, 130, 246, 0.06), transparent),
+      #ffffff;
     background-attachment: fixed;
   }
 }

@@ -1,3 +1,4 @@
+// src/components/layout/Header.tsx
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -9,14 +10,10 @@ import { profile } from "@/data/profile";
 import { Container } from "@/components/common/Container";
 import { cn } from "@/lib/utils";
 
-/* ----------------------------- Konstanta ----------------------------- */
-
 const SCROLL_THRESHOLD = 20;
 const ACTIVE_OFFSET = 140;
 const EASE_OUT_EXPO = [0.22, 1, 0.36, 1] as const;
 const SPRING_PILL = { type: "spring" as const, stiffness: 380, damping: 32 };
-
-/* ------------------------------- Utils ------------------------------- */
 
 const getSectionId = (href: string) =>
   href === "/" ? "" : href.replace("/#", "");
@@ -33,8 +30,6 @@ function findActiveHref(): string {
   }
   return current;
 }
-
-/* ------------------------------ Component ---------------------------- */
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -75,7 +70,6 @@ export function Header() {
     [reduceMotion]
   );
 
-  /* Header wrapper: glassmorphism lembut saat scroll */
   const headerClass = useMemo(
     () =>
       cn(
@@ -83,11 +77,10 @@ export function Header() {
         "transition-all duration-500 ease-out",
         isScrolled || isMobileMenuOpen
           ? [
-              // ✨ Glass lembut dengan gradient pastel tipis
-              "border-white/60",
-              "bg-gradient-to-r from-white/80 via-white/70 to-white/80",
+              "border-slate-200",
+              "bg-white/80",
               "backdrop-blur-xl",
-              "shadow-[0_8px_32px_-8px_rgba(99,102,241,0.15)]",
+              "shadow-lg shadow-blue-100/50",
             ]
           : "border-transparent bg-transparent"
       ),
@@ -107,20 +100,17 @@ export function Header() {
           <Link
             href="/"
             onClick={(e) => handleNavClick(e, "/")}
-            className="group flex items-center gap-2 rounded-full text-lg font-semibold tracking-tight text-slate-900 outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/70"
+            className="group flex items-center gap-2 rounded-full text-lg font-semibold tracking-tight text-slate-900 outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70"
           >
             <span
               aria-hidden
-              className="h-2.5 w-2.5 rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 shadow-sm shadow-indigo-400/40 transition-transform duration-300 group-hover:scale-125"
+              className="h-2.5 w-2.5 rounded-full bg-blue-600 shadow-sm shadow-blue-400/40 transition-transform duration-300 group-hover:scale-125"
             />
             {profile.name.split(" ")[0]}
           </Link>
 
           {/* Navigasi desktop */}
-          <nav
-            className="hidden items-center gap-1 md:flex"
-            aria-label="Navigasi utama"
-          >
+          <nav className="hidden items-center gap-1 md:flex" aria-label="Navigasi utama">
             {navigation.map((item) => {
               const isActive = activeHref === item.href;
               return (
@@ -132,9 +122,9 @@ export function Header() {
                   className={cn(
                     "relative rounded-full px-4 py-1.5 text-sm font-medium outline-none",
                     "transition-colors duration-300",
-                    "focus-visible:ring-2 focus-visible:ring-indigo-400/70",
+                    "focus-visible:ring-2 focus-visible:ring-blue-400/70",
                     isActive
-                      ? "text-slate-900"
+                      ? "text-blue-700"
                       : "text-slate-500 hover:text-slate-900"
                   )}
                 >
@@ -142,7 +132,7 @@ export function Header() {
                     <motion.span
                       layoutId="nav-active-pill"
                       aria-hidden
-                      className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500/15 via-purple-500/15 to-pink-500/15 ring-1 ring-inset ring-indigo-400/20"
+                      className="absolute inset-0 rounded-full bg-blue-50 ring-1 ring-inset ring-blue-200/50"
                       transition={SPRING_PILL}
                     />
                   )}
@@ -155,7 +145,7 @@ export function Header() {
           {/* Tombol menu mobile */}
           <button
             onClick={() => setIsMobileMenuOpen((open) => !open)}
-            className="-mr-2 rounded-full p-2 text-slate-600 outline-none transition hover:bg-slate-900/5 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-indigo-400/70 md:hidden"
+            className="-mr-2 rounded-full p-2 text-slate-600 outline-none transition hover:bg-slate-100 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-blue-400/70 md:hidden"
             aria-label={isMobileMenuOpen ? "Tutup menu" : "Buka menu"}
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
@@ -176,10 +166,9 @@ export function Header() {
               transition={{ duration: 0.2 }}
               className={cn(
                 "mt-2 overflow-hidden rounded-2xl p-2 md:hidden",
-                "border border-white/60",
-                "bg-gradient-to-br from-white/90 via-white/80 to-white/90",
-                "backdrop-blur-xl",
-                "shadow-[0_12px_40px_-12px_rgba(99,102,241,0.25)]"
+                "border border-slate-200",
+                "bg-white/95 backdrop-blur-xl",
+                "shadow-lg shadow-blue-100/50"
               )}
             >
               {navigation.map((item) => {
@@ -192,17 +181,17 @@ export function Header() {
                     aria-current={isActive ? "page" : undefined}
                     className={cn(
                       "flex items-center justify-between rounded-xl px-4 py-3 text-base font-medium outline-none",
-                      "transition-colors focus-visible:ring-2 focus-visible:ring-indigo-400/70",
+                      "transition-colors focus-visible:ring-2 focus-visible:ring-blue-400/70",
                       isActive
-                        ? "bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 text-slate-900"
-                        : "text-slate-500 hover:bg-slate-900/5 hover:text-slate-900"
+                        ? "bg-blue-50 text-blue-700"
+                        : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
                     )}
                   >
                     {item.label}
                     {isActive && (
                       <span
                         aria-hidden
-                        className="h-1.5 w-1.5 rounded-full bg-gradient-to-br from-indigo-500 to-pink-500"
+                        className="h-1.5 w-1.5 rounded-full bg-blue-600"
                       />
                     )}
                   </a>

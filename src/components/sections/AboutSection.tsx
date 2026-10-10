@@ -1,3 +1,4 @@
+// src/components/sections/AboutSection.tsx
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
@@ -6,36 +7,27 @@ import { profile } from "@/data/profile";
 import { SectionShell } from "@/components/layout/SectionShell";
 import { cn } from "@/lib/utils";
 
-/* ----------------------------- Konstanta ----------------------------- */
-
 const SKILLS = ["Laravel", "React", "Next.js", "TypeScript", "MySQL"] as const;
-
 const EASE_OUT_EXPO = [0.22, 1, 0.36, 1] as const;
 const VIEWPORT = { once: true, margin: "-80px" } as const;
-
-/* ------------------------------ Component ---------------------------- */
 
 export function AboutSection() {
   const reduceMotion = useReducedMotion();
   const offset = reduceMotion ? 0 : 32;
 
   return (
-    <SectionShell id="about">
+    <SectionShell id="about" className="bg-white">
       <div className="grid items-center gap-14 md:grid-cols-[1.15fr_0.85fr] md:gap-20">
-        {/* ------------------------- Kiri: Teks ------------------------- */}
+        {/* Kiri: Teks */}
         <motion.div
           initial={{ opacity: 0, x: -offset }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={VIEWPORT}
           transition={{ duration: 0.7, ease: EASE_OUT_EXPO }}
         >
-          {/* Label kecil dengan garis gradient */}
           <div className="mb-5 flex items-center gap-3 text-sm font-medium">
-            <span
-              aria-hidden
-              className="h-px w-8 bg-gradient-to-r from-indigo-500 to-pink-500"
-            />
-            <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <span aria-hidden className="h-px w-8 bg-blue-600" />
+            <span className="text-blue-600 uppercase tracking-widest text-xs font-semibold">
               About me
             </span>
           </div>
@@ -48,31 +40,22 @@ export function AboutSection() {
             {profile.about.description}
           </p>
 
-          {/* Chip skill — glass pastel */}
-          <ul
-            className="mt-8 flex flex-wrap gap-2.5"
-            aria-label="Teknologi yang saya gunakan"
-          >
+          {/* Chip skill — putih dengan border biru */}
+          <ul className="mt-8 flex flex-wrap gap-2.5" aria-label="Teknologi">
             {SKILLS.map((skill) => (
               <li
                 key={skill}
                 className={cn(
-                  "group/chip flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium",
-                  "border border-white/70",
-                  "bg-gradient-to-br from-white/80 to-white/60",
-                  "backdrop-blur-sm",
-                  "text-slate-600",
-                  "shadow-[0_2px_8px_-2px_rgba(99,102,241,0.12)]",
+                  "group/chip flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium",
+                  "border border-slate-200 bg-white text-slate-600",
+                  "shadow-sm",
                   "transition-all duration-300",
-                  "hover:-translate-y-0.5",
-                  "hover:border-indigo-300/60",
-                  "hover:text-slate-900",
-                  "hover:shadow-[0_6px_16px_-4px_rgba(99,102,241,0.25)]"
+                  "hover:-translate-y-0.5 hover:border-blue-300 hover:text-blue-700 hover:shadow-md hover:shadow-blue-100"
                 )}
               >
                 <span
                   aria-hidden
-                  className="h-1.5 w-1.5 rounded-full bg-gradient-to-br from-indigo-500 to-pink-500 transition-transform duration-300 group-hover/chip:scale-125"
+                  className="h-1.5 w-1.5 rounded-full bg-blue-500 transition-transform duration-300 group-hover/chip:scale-125"
                 />
                 {skill}
               </li>
@@ -80,7 +63,7 @@ export function AboutSection() {
           </ul>
         </motion.div>
 
-        {/* ------------------------- Kanan: Foto ------------------------ */}
+        {/* Kanan: Foto */}
         <motion.div
           initial={{ opacity: 0, x: offset }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -89,38 +72,20 @@ export function AboutSection() {
           className="flex justify-center md:justify-end"
         >
           <div className="group relative w-64 md:w-80">
-            {/* ✨ Glow gradient lembut di belakang foto */}
+            {/* Glow biru lembut */}
             <div
               aria-hidden
-              className={cn(
-                "absolute -inset-8 rounded-full blur-3xl",
-                "bg-gradient-to-br from-indigo-400/30 via-purple-400/25 to-pink-400/30",
-                "opacity-70 transition-opacity duration-700",
-                "group-hover:opacity-100"
-              )}
+              className="absolute -inset-8 rounded-full blur-3xl bg-gradient-to-br from-blue-400/25 via-sky-400/15 to-transparent opacity-70 transition-opacity duration-700 group-hover:opacity-100"
             />
 
-            {/* Frame garis bergeser — gradient border */}
+            {/* Frame garis bergeser */}
             <div
               aria-hidden
-              className={cn(
-                "absolute inset-0 translate-x-4 translate-y-4 rounded-3xl",
-                "border border-indigo-300/40",
-                "transition-transform duration-500",
-                "group-hover:translate-x-2 group-hover:translate-y-2"
-              )}
+              className="absolute inset-0 translate-x-4 translate-y-4 rounded-3xl border border-blue-200 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2"
             />
 
             {/* Foto utama */}
-            <div
-              className={cn(
-                "relative aspect-[4/5] overflow-hidden rounded-3xl",
-                "border border-white/70",
-                "bg-white/50",
-                "shadow-[0_20px_50px_-20px_rgba(99,102,241,0.35)]",
-                "backdrop-blur-sm"
-              )}
-            >
+            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl shadow-blue-100/50">
               <Image
                 src="/profil.png"
                 alt={`Foto profil ${profile.name}`}
@@ -130,13 +95,13 @@ export function AboutSection() {
                 priority
               />
 
-              {/* Overlay gradient lembut (bukan hitam) */}
+              {/* Overlay biru tipis */}
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-indigo-900/30 via-transparent to-transparent"
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-blue-900/10 via-transparent to-transparent"
               />
 
-              {/* Ring dalam halus */}
+              {/* Ring dalam */}
               <div
                 aria-hidden
                 className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/40"

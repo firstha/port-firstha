@@ -1,3 +1,4 @@
+// src/components/layout/SectionShell.tsx
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/common/Container";
 
@@ -7,16 +8,9 @@ type SectionShellProps = {
   id?: string;
 };
 
-export function SectionShell({
-  children,
-  className,
-  id,
-}: SectionShellProps) {
+export function SectionShell({ children, className, id }: SectionShellProps) {
   return (
-    <section
-      id={id}
-      className={cn("py-24 relative", className)}
-    >
+    <section id={id} className={cn("py-24 relative", className)}>
       <Container>{children}</Container>
     </section>
   );
