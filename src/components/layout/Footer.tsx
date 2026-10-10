@@ -1,6 +1,6 @@
 // src/components/layout/Footer.tsx
 import { profile } from "@/data/profile";
-import { Mail, Globe } from "lucide-react";
+import {  Mail, Globe } from "lucide-react";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -17,10 +17,9 @@ export function Footer() {
   };
 
   return (
-    <footer className="border-t border-slate-200 bg-white">
-      <div className="max-w-6xl mx-auto px-6 py-12">
+    <footer className="border-t border-slate-200 bg-white mt-auto">
+      <div className="max-w-6xl mx-auto px-6 py-10">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          {/* Left - Copyright */}
           <div className="text-center md:text-left">
             <p className="text-sm text-slate-600">
               © {year} {profile.name}. All rights reserved.
@@ -30,7 +29,6 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Right - Social Links */}
           <div className="flex items-center gap-2">
             {profile.socials.map((social) => (
               <a

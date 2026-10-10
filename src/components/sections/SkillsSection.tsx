@@ -5,14 +5,15 @@ import { motion } from "framer-motion";
 import { skills } from "@/data/skills";
 import { SectionShell } from "@/components/layout/SectionShell";
 
+const VIEWPORT = { once: true, margin: "-80px" } as const;
+
 export function SkillsSection() {
   return (
     <SectionShell id="skills" className="bg-slate-50/50">
-      {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={VIEWPORT}
         transition={{ duration: 0.5 }}
         className="text-center max-w-2xl mx-auto mb-16"
       >
@@ -27,14 +28,13 @@ export function SkillsSection() {
         </p>
       </motion.div>
 
-      {/* Grid Skills */}
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         {skills.map((category, idx) => (
           <motion.div
             key={category.title}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={VIEWPORT}
             transition={{ duration: 0.5, delay: idx * 0.1 }}
             className="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm hover:border-blue-200 hover:shadow-lg hover:shadow-blue-100/50 transition-all duration-300"
           >

@@ -47,45 +47,32 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* ---------------------------------------------------------------
-   🎨 TEMA BIRU + PUTIH — Minimalis, Elegan, Light Mode Only
-   Palet: putih bersih → biru soft → biru navy
-   --------------------------------------------------------------- */
+/* Tema Biru + Putih — Minimalis Elegan */
 :root {
   --background: #ffffff;
-  --foreground: #0a1628;              /* navy-950 */
-
+  --foreground: #0a1628;
   --card: #ffffff;
   --card-foreground: #0a1628;
-
   --popover: #ffffff;
   --popover-foreground: #0a1628;
-
-  --primary: #2563eb;                 /* blue-600 */
+  --primary: #2563eb;
   --primary-foreground: #ffffff;
-
-  --secondary: #f0f6ff;               /* blue-50 */
+  --secondary: #f0f6ff;
   --secondary-foreground: #0a1628;
-
-  --muted: #f8fafc;                   /* slate-50 */
-  --muted-foreground: #64748b;        /* slate-500 */
-
-  --accent: #dbeafe;                  /* blue-100 */
-  --accent-foreground: #1e40af;       /* blue-800 */
-
+  --muted: #f8fafc;
+  --muted-foreground: #64748b;
+  --accent: #dbeafe;
+  --accent-foreground: #1e40af;
   --destructive: #ef4444;
-  --border: #e2e8f0;                  /* slate-200 */
+  --border: #e2e8f0;
   --input: #e2e8f0;
   --ring: #2563eb;
-
   --chart-1: #2563eb;
   --chart-2: #3b82f6;
   --chart-3: #60a5fa;
   --chart-4: #93c5fd;
   --chart-5: #bfdbfe;
-
   --radius: 0.75rem;
-
   --sidebar: #ffffff;
   --sidebar-foreground: #0a1628;
   --sidebar-primary: #2563eb;
@@ -94,11 +81,9 @@
   --sidebar-accent-foreground: #0a1628;
   --sidebar-border: #e2e8f0;
   --sidebar-ring: #2563eb;
-
   color-scheme: light;
 }
 
-/* Dark mode (opsional) — tetap biru elegan */
 .dark {
   --background: #0a1628;
   --foreground: #f8fafc;
@@ -128,9 +113,6 @@
   --sidebar-ring: #60a5fa;
 }
 
-/* ---------------------------------------------------------------
-   🎨 Base styles
-   --------------------------------------------------------------- */
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -146,10 +128,6 @@
   body {
     @apply text-foreground;
     min-height: 100vh;
-    background:
-      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(37, 99, 235, 0.08), transparent),
-      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(59, 130, 246, 0.06), transparent),
-      #ffffff;
-    background-attachment: fixed;
+    background: #ffffff;
   }
 }

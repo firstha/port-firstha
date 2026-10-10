@@ -2,6 +2,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,8 +16,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Firstha Noventia",
-  description: "Portofolio Full Stack Web Developer",
+  title: {
+    default: "Firstha Noventia — Full Stack Web Developer",
+    template: "%s | Firstha Noventia",
+  },
+  description:
+    "Portfolio Full Stack Web Developer. Membangun aplikasi web dengan Laravel, React, Next.js, TypeScript, dan MySQL.",
 };
 
 export default function RootLayout({
@@ -28,7 +34,11 @@ export default function RootLayout({
       lang="id"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-white">{children}</body>
+      <body className="min-h-full flex flex-col bg-white text-slate-900">
+        <Header />
+        <div className="flex-1 pt-20">{children}</div>
+        <Footer />
+      </body>
     </html>
   );
 }
