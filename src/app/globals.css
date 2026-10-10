@@ -47,32 +47,44 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* Tema Biru + Putih — Minimalis Elegan */
+/* ================================================================
+   ☀️ LIGHT MODE — Biru + Putih Minimalis Elegan
+   ================================================================ */
 :root {
   --background: #ffffff;
   --foreground: #0a1628;
+
   --card: #ffffff;
   --card-foreground: #0a1628;
+
   --popover: #ffffff;
   --popover-foreground: #0a1628;
+
   --primary: #2563eb;
   --primary-foreground: #ffffff;
+
   --secondary: #f0f6ff;
   --secondary-foreground: #0a1628;
+
   --muted: #f8fafc;
   --muted-foreground: #64748b;
+
   --accent: #dbeafe;
   --accent-foreground: #1e40af;
+
   --destructive: #ef4444;
   --border: #e2e8f0;
   --input: #e2e8f0;
   --ring: #2563eb;
+
   --chart-1: #2563eb;
   --chart-2: #3b82f6;
   --chart-3: #60a5fa;
   --chart-4: #93c5fd;
   --chart-5: #bfdbfe;
+
   --radius: 0.75rem;
+
   --sidebar: #ffffff;
   --sidebar-foreground: #0a1628;
   --sidebar-primary: #2563eb;
@@ -81,38 +93,57 @@
   --sidebar-accent-foreground: #0a1628;
   --sidebar-border: #e2e8f0;
   --sidebar-ring: #2563eb;
-  color-scheme: light;
 }
 
+/* ================================================================
+   🌙 DARK MODE — Biru Navy Gelap Elegan
+   ================================================================ */
 .dark {
   --background: #0a1628;
-  --foreground: #f8fafc;
+  --foreground: #f1f5f9;
+
   --card: #0f1f3a;
-  --card-foreground: #f8fafc;
+  --card-foreground: #f1f5f9;
+
   --popover: #0f1f3a;
-  --popover-foreground: #f8fafc;
-  --primary: #60a5fa;
-  --primary-foreground: #0a1628;
+  --popover-foreground: #f1f5f9;
+
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+
   --secondary: #1e3a5f;
-  --secondary-foreground: #f8fafc;
+  --secondary-foreground: #f1f5f9;
+
   --muted: #1e3a5f;
-  --muted-foreground: #cbd5e1;
+  --muted-foreground: #94a3b8;
+
   --accent: #1e40af;
   --accent-foreground: #dbeafe;
+
   --destructive: #f87171;
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: #60a5fa;
+  --border: #1e3a5f;
+  --input: #1e3a5f;
+  --ring: #3b82f6;
+
+  --chart-1: #3b82f6;
+  --chart-2: #60a5fa;
+  --chart-3: #93c5fd;
+  --chart-4: #bfdbfe;
+  --chart-5: #dbeafe;
+
   --sidebar: #0f1f3a;
-  --sidebar-foreground: #f8fafc;
-  --sidebar-primary: #60a5fa;
-  --sidebar-primary-foreground: #0a1628;
+  --sidebar-foreground: #f1f5f9;
+  --sidebar-primary: #3b82f6;
+  --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #1e3a5f;
-  --sidebar-accent-foreground: #f8fafc;
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: #60a5fa;
+  --sidebar-accent-foreground: #f1f5f9;
+  --sidebar-border: #1e3a5f;
+  --sidebar-ring: #3b82f6;
 }
 
+/* ================================================================
+   🎨 BASE STYLES
+   ================================================================ */
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -126,8 +157,9 @@
   }
 
   body {
-    @apply text-foreground;
+    @apply text-foreground bg-background;
     min-height: 100vh;
-    background: #ffffff;
+    background-attachment: fixed;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 }

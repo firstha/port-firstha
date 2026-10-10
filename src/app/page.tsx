@@ -1,4 +1,3 @@
-// src/app/page.tsx
 "use client";
 
 import Link from "next/link";
@@ -11,14 +10,14 @@ const EASE_OUT_EXPO = [0.22, 1, 0.36, 1] as const;
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white dark:bg-slate-950">
       <SectionShell className="min-h-[calc(100vh-5rem)] flex items-center justify-center overflow-hidden relative">
         {/* Dekorasi background */}
         <div className="absolute inset-0 -z-10" aria-hidden>
-          <div className="absolute top-[-160px] left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-gradient-to-br from-blue-400/20 via-blue-300/10 to-transparent blur-[140px] rounded-full" />
-          <div className="absolute bottom-[-200px] right-[-120px] w-[500px] h-[500px] bg-gradient-to-br from-blue-500/15 via-sky-400/10 to-transparent blur-[120px] rounded-full" />
+          <div className="absolute top-[-160px] left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-gradient-to-br from-blue-400/20 via-blue-300/10 to-transparent dark:from-blue-600/20 dark:via-blue-500/10 blur-[140px] rounded-full" />
+          <div className="absolute bottom-[-200px] right-[-120px] w-[500px] h-[500px] bg-gradient-to-br from-blue-500/15 via-sky-400/10 to-transparent dark:from-blue-700/15 dark:via-sky-600/10 blur-[120px] rounded-full" />
           <div
-            className="absolute inset-0 opacity-[0.03]"
+            className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"
             style={{
               backgroundImage: `linear-gradient(#2563eb 1px, transparent 1px), linear-gradient(90deg, #2563eb 1px, transparent 1px)`,
               backgroundSize: "64px 64px",
@@ -32,7 +31,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
-            className="inline-flex items-center gap-2 text-xs tracking-[0.3em] text-blue-600 uppercase font-semibold border border-blue-200 bg-blue-50/50 backdrop-blur-sm px-4 py-2 rounded-full"
+            className="inline-flex items-center gap-2 text-xs tracking-[0.3em] text-blue-600 dark:text-blue-400 uppercase font-semibold border border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/40 backdrop-blur-sm px-4 py-2 rounded-full"
           >
             <Sparkles size={12} className="text-blue-500" />
             {profile.role}
@@ -43,10 +42,10 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease: EASE_OUT_EXPO }}
-            className="text-5xl md:text-7xl font-bold mt-6 text-slate-900 tracking-tight leading-[1.05]"
+            className="text-5xl md:text-7xl font-bold mt-6 text-slate-900 dark:text-slate-100 tracking-tight leading-[1.05]"
           >
             Hi, I&apos;m{" "}
-            <span className="bg-gradient-to-r from-blue-700 via-blue-500 to-sky-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-700 via-blue-500 to-sky-500 dark:from-blue-400 dark:via-blue-300 dark:to-sky-400 bg-clip-text text-transparent">
               {profile.name}
             </span>
           </motion.h1>
@@ -56,17 +55,17 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease: EASE_OUT_EXPO }}
-            className="mt-6 text-lg md:text-xl text-slate-600 font-medium"
+            className="mt-6 text-lg md:text-xl text-slate-600 dark:text-slate-300 font-medium"
           >
             {profile.tagline}
           </motion.p>
 
-          {/* Deskripsi singkat */}
+          {/* Deskripsi */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3, ease: EASE_OUT_EXPO }}
-            className="mt-4 text-slate-500 max-w-xl mx-auto leading-relaxed"
+            className="mt-4 text-slate-500 dark:text-slate-400 max-w-xl mx-auto leading-relaxed"
           >
             {profile.about.description}
           </motion.p>
@@ -90,7 +89,7 @@ export default function HomePage() {
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center px-7 py-3.5 rounded-xl font-medium text-slate-700 border border-slate-200 bg-white hover:border-blue-300 hover:text-blue-700 hover:bg-blue-50/50 hover:-translate-y-0.5 transition-all duration-300"
+              className="inline-flex items-center justify-center px-7 py-3.5 rounded-xl font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:border-blue-300 dark:hover:border-blue-600 hover:text-blue-700 dark:hover:text-blue-400 hover:bg-blue-50/50 dark:hover:bg-blue-950/40 hover:-translate-y-0.5 transition-all duration-300"
             >
               Contact Me
             </Link>

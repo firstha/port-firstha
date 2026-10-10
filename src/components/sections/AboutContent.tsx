@@ -1,4 +1,3 @@
-// src/components/sections/AboutContent.tsx
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
@@ -21,11 +20,11 @@ export function AboutContent() {
         viewport={VIEWPORT}
         transition={{ duration: 0.7, ease: EASE_OUT_EXPO }}
       >
-        <h2 className="text-balance text-3xl font-bold leading-[1.15] tracking-tight text-slate-900 md:text-4xl">
+        <h2 className="text-balance text-3xl font-bold leading-[1.15] tracking-tight text-slate-900 dark:text-slate-100 md:text-4xl">
           {profile.about.headline}
         </h2>
 
-        <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-slate-500 md:text-lg md:leading-8">
+        <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-slate-500 dark:text-slate-400 md:text-lg md:leading-8">
           {profile.about.description}
         </p>
 
@@ -33,7 +32,7 @@ export function AboutContent() {
           {SKILLS.map((skill) => (
             <li
               key={skill}
-              className="group/chip flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium border border-slate-200 bg-white text-slate-600 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-300 hover:text-blue-700 hover:shadow-md hover:shadow-blue-100"
+              className="group/chip flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-300 dark:hover:border-blue-600 hover:text-blue-700 dark:hover:text-blue-400 hover:shadow-md hover:shadow-blue-100 dark:hover:shadow-blue-950/50"
             >
               <span
                 aria-hidden
@@ -55,13 +54,13 @@ export function AboutContent() {
         <div className="group relative w-64 md:w-80">
           <div
             aria-hidden
-            className="absolute -inset-8 rounded-full blur-3xl bg-gradient-to-br from-blue-400/25 via-sky-400/15 to-transparent opacity-70 transition-opacity duration-700 group-hover:opacity-100"
+            className="absolute -inset-8 rounded-full blur-3xl bg-gradient-to-br from-blue-400/25 via-sky-400/15 to-transparent dark:from-blue-600/25 dark:via-blue-500/15 opacity-70 transition-opacity duration-700 group-hover:opacity-100"
           />
           <div
             aria-hidden
-            className="absolute inset-0 translate-x-4 translate-y-4 rounded-3xl border border-blue-200 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2"
+            className="absolute inset-0 translate-x-4 translate-y-4 rounded-3xl border border-blue-200 dark:border-blue-800 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2"
           />
-          <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl shadow-blue-100/50">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xl shadow-blue-100/50 dark:shadow-blue-950/50">
             <Image
               src="/profil.png"
               alt={`Foto profil ${profile.name}`}
@@ -72,7 +71,7 @@ export function AboutContent() {
             />
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/40"
+              className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/40 dark:ring-white/10"
             />
           </div>
         </div>

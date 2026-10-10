@@ -1,10 +1,9 @@
-// src/components/sections/ContactContent.tsx
 "use client";
 
 import { motion } from "framer-motion";
 import { contact } from "@/data/contact";
 import { profile } from "@/data/profile";
-import { Mail, Phone, MapPin, Globe } from "lucide-react";
+import { Mail, Phone, MapPin,  Globe } from "lucide-react";
 
 const EASE_OUT_EXPO = [0.22, 1, 0.36, 1] as const;
 const VIEWPORT = { once: true, margin: "-80px" } as const;
@@ -23,7 +22,6 @@ export function ContactContent() {
 
   return (
     <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-      {/* Contact Info */}
       <motion.div
         initial={{ opacity: 0, x: -30 }}
         whileInView={{ opacity: 1, x: 0 }}
@@ -31,21 +29,23 @@ export function ContactContent() {
         transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
         className="space-y-6"
       >
-        <h3 className="text-xl font-semibold text-slate-900">Get in Touch</h3>
+        <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
+          Get in Touch
+        </h3>
 
         <div className="space-y-4">
           <a
             href={`mailto:${contact.email}`}
-            className="flex items-center gap-4 p-4 rounded-xl border border-slate-200 bg-white hover:border-blue-300 hover:shadow-md hover:shadow-blue-100/50 transition-all group"
+            className="flex items-center gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-md hover:shadow-blue-100/50 dark:hover:shadow-blue-950/50 transition-all group"
           >
-            <div className="p-2.5 rounded-lg bg-blue-50 group-hover:bg-blue-100 transition">
-              <Mail size={20} className="text-blue-600" />
+            <div className="p-2.5 rounded-lg bg-blue-50 dark:bg-blue-950/40 group-hover:bg-blue-100 dark:group-hover:bg-blue-950/60 transition">
+              <Mail size={20} className="text-blue-600 dark:text-blue-400" />
             </div>
             <div>
-              <p className="text-xs text-slate-400 uppercase tracking-wider">
+              <p className="text-xs text-slate-400 dark:text-slate-500 uppercase tracking-wider">
                 Email
               </p>
-              <p className="text-slate-900 font-medium group-hover:text-blue-700 transition">
+              <p className="text-slate-900 dark:text-slate-100 font-medium group-hover:text-blue-700 dark:group-hover:text-blue-400 transition">
                 {contact.email}
               </p>
             </div>
@@ -54,16 +54,16 @@ export function ContactContent() {
           {contact.phone && (
             <a
               href={`tel:${contact.phone}`}
-              className="flex items-center gap-4 p-4 rounded-xl border border-slate-200 bg-white hover:border-blue-300 hover:shadow-md hover:shadow-blue-100/50 transition-all group"
+              className="flex items-center gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-md hover:shadow-blue-100/50 dark:hover:shadow-blue-950/50 transition-all group"
             >
-              <div className="p-2.5 rounded-lg bg-blue-50 group-hover:bg-blue-100 transition">
-                <Phone size={20} className="text-blue-600" />
+              <div className="p-2.5 rounded-lg bg-blue-50 dark:bg-blue-950/40 group-hover:bg-blue-100 dark:group-hover:bg-blue-950/60 transition">
+                <Phone size={20} className="text-blue-600 dark:text-blue-400" />
               </div>
               <div>
-                <p className="text-xs text-slate-400 uppercase tracking-wider">
+                <p className="text-xs text-slate-400 dark:text-slate-500 uppercase tracking-wider">
                   Phone
                 </p>
-                <p className="text-slate-900 font-medium group-hover:text-blue-700 transition">
+                <p className="text-slate-900 dark:text-slate-100 font-medium group-hover:text-blue-700 dark:group-hover:text-blue-400 transition">
                   {contact.phone}
                 </p>
               </div>
@@ -71,22 +71,23 @@ export function ContactContent() {
           )}
 
           {contact.location && (
-            <div className="flex items-center gap-4 p-4 rounded-xl border border-slate-200 bg-white">
-              <div className="p-2.5 rounded-lg bg-blue-50">
-                <MapPin size={20} className="text-blue-600" />
+            <div className="flex items-center gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+              <div className="p-2.5 rounded-lg bg-blue-50 dark:bg-blue-950/40">
+                <MapPin size={20} className="text-blue-600 dark:text-blue-400" />
               </div>
               <div>
-                <p className="text-xs text-slate-400 uppercase tracking-wider">
+                <p className="text-xs text-slate-400 dark:text-slate-500 uppercase tracking-wider">
                   Location
                 </p>
-                <p className="text-slate-900 font-medium">{contact.location}</p>
+                <p className="text-slate-900 dark:text-slate-100 font-medium">
+                  {contact.location}
+                </p>
               </div>
             </div>
           )}
         </div>
       </motion.div>
 
-      {/* Social */}
       <motion.div
         initial={{ opacity: 0, x: 30 }}
         whileInView={{ opacity: 1, x: 0 }}
@@ -94,7 +95,7 @@ export function ContactContent() {
         transition={{ duration: 0.6, delay: 0.15, ease: EASE_OUT_EXPO }}
         className="space-y-6"
       >
-        <h3 className="text-xl font-semibold text-slate-900">
+        <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
           Connect with Me
         </h3>
 
@@ -105,12 +106,12 @@ export function ContactContent() {
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 p-4 rounded-xl border border-slate-200 bg-white hover:border-blue-300 hover:bg-blue-50/50 hover:shadow-md hover:shadow-blue-100/50 transition-all group"
+              className="flex items-center gap-3 p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-blue-300 dark:hover:border-blue-700 hover:bg-blue-50/50 dark:hover:bg-blue-950/40 hover:shadow-md hover:shadow-blue-100/50 dark:hover:shadow-blue-950/50 transition-all group"
             >
-              <span className="text-slate-400 group-hover:text-blue-600 transition">
+              <span className="text-slate-400 dark:text-slate-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
                 {getIcon(social.platform)}
               </span>
-              <span className="text-sm text-slate-600 group-hover:text-blue-700 transition font-medium">
+              <span className="text-sm text-slate-600 dark:text-slate-300 group-hover:text-blue-700 dark:group-hover:text-blue-400 transition font-medium">
                 {social.label}
               </span>
             </a>

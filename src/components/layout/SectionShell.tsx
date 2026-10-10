@@ -1,4 +1,3 @@
-// src/components/layout/SectionShell.tsx
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/common/Container";
 

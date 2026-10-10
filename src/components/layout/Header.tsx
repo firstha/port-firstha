@@ -9,6 +9,7 @@ import { Menu, X } from "lucide-react";
 import { navigation } from "@/config/navigation";
 import { profile } from "@/data/profile";
 import { Container } from "@/components/common/Container";
+import { ThemeToggle } from "@/components/common/ThemeToggle";
 import { cn } from "@/lib/utils";
 
 const SCROLL_THRESHOLD = 20;
@@ -28,7 +29,6 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Tutup menu mobile saat pindah halaman
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [pathname]);
@@ -45,9 +45,9 @@ export function Header() {
   const headerClass = useMemo(
     () =>
       cn(
-        "flex h-14 items-center justify-between rounded-full border px-5 transition-all duration-500 ease-out",
+        "flex h-14 items-center justify-between gap-3 rounded-full border px-5 transition-all duration-500 ease-out",
         isScrolled || isMobileMenuOpen
-          ? "border-slate-200 bg-white/80 backdrop-blur-xl shadow-lg shadow-blue-100/50"
+          ? "border-slate-200 bg-white/80 backdrop-blur-xl shadow-lg shadow-blue-100/50 dark:border-slate-700 dark:bg-slate-900/80 dark:shadow-blue-950/50"
           : "border-transparent bg-transparent"
       ),
     [isScrolled, isMobileMenuOpen]
@@ -65,7 +65,7 @@ export function Header() {
           {/* Logo */}
           <Link
             href="/"
-            className="group flex items-center gap-2 rounded-full text-lg font-semibold tracking-tight text-slate-900 outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70"
+            className="group flex items-center gap-2 rounded-full text-lg font-semibold tracking-tight text-slate-900 dark:text-slate-100 outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70"
           >
             <span
               aria-hidden
@@ -90,15 +90,15 @@ export function Header() {
                     "relative rounded-full px-4 py-1.5 text-sm font-medium outline-none transition-colors duration-300",
                     "focus-visible:ring-2 focus-visible:ring-blue-400/70",
                     isActive
-                      ? "text-blue-700"
-                      : "text-slate-500 hover:text-slate-900"
+                      ? "text-blue-700 dark:text-blue-400"
+                      : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
                   )}
                 >
                   {isActive && (
                     <motion.span
                       layoutId="nav-active-pill"
                       aria-hidden
-                      className="absolute inset-0 rounded-full bg-blue-50 ring-1 ring-inset ring-blue-200/50"
+                      className="absolute inset-0 rounded-full bg-blue-50 ring-1 ring-inset ring-blue-200/50 dark:bg-blue-950/60 dark:ring-blue-800/50"
                       transition={SPRING_PILL}
                     />
                   )}
@@ -108,19 +108,23 @@ export function Header() {
             })}
           </nav>
 
-          {/* Menu mobile */}
-          <button
-            onClick={() => setIsMobileMenuOpen((open) => !open)}
-            className="-mr-2 rounded-full p-2 text-slate-600 outline-none transition hover:bg-slate-100 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-blue-400/70 md:hidden"
-            aria-label={isMobileMenuOpen ? "Tutup menu" : "Buka menu"}
-            aria-expanded={isMobileMenuOpen}
-            aria-controls="mobile-menu"
-          >
-            {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          {/* Kanan: Theme Toggle + Menu Mobile */}
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+
+            <button
+              onClick={() => setIsMobileMenuOpen((open) => !open)}
+              className="-mr-2 rounded-full p-2 text-slate-600 outline-none transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100 focus-visible:ring-2 focus-visible:ring-blue-400/70 md:hidden"
+              aria-label={isMobileMenuOpen ? "Tutup menu" : "Buka menu"}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
+            >
+              {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
 
-        {/* Menu mobile dropdown */}
+        {/* Menu mobile */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.nav
@@ -130,7 +134,7 @@ export function Header() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -12, scale: 0.98 }}
               transition={{ duration: 0.2 }}
-              className="mt-2 overflow-hidden rounded-2xl p-2 md:hidden border border-slate-200 bg-white/95 backdrop-blur-xl shadow-lg shadow-blue-100/50"
+              className="mt-2 overflow-hidden rounded-2xl p-2 md:hidden border border-slate-200 bg-white/95 backdrop-blur-xl shadow-lg shadow-blue-100/50 dark:border-slate-700 dark:bg-slate-900/95 dark:shadow-blue-950/50"
             >
               {navigation.map((item) => {
                 const isActive =
@@ -145,8 +149,8 @@ export function Header() {
                     className={cn(
                       "flex items-center justify-between rounded-xl px-4 py-3 text-base font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-blue-400/70",
                       isActive
-                        ? "bg-blue-50 text-blue-700"
-                        : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
+                        ? "bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-400"
+                        : "text-slate-500 hover:bg-slate-50 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100"
                     )}
                   >
                     {item.label}

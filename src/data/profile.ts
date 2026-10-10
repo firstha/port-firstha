@@ -1,18 +1,18 @@
 import type { Profile } from "@/domain/types";
 
 export const profile: Profile = {
-  name: "Firstha Noventia",
-  role: "Junior Programmer",
+  name: "Firstha Noventia Sari",
+  role: "Informatics Student | Junior Programmer",
   about: {
-    headline: "Fresh Graduate SMK yang fokus pada pengembangan aplikasi web",
+    headline: "Mahasiswa Informatika yang tertarik pada pengembangan aplikasi dan teknologi",
     description:
-      "Fresh Graduate SMK yang fokus pada pengembangan aplikasi web menggunakan Laravel, React, Next.js, TypeScript, MySQL, dan Tailwind CSS. Saya suka membangun fitur end-to-end, merapikan UI/UX, serta menulis kode yang maintainable.",
+      "Saya adalah mahasiswa Informatika dengan latar belakang Rekayasa Perangkat Lunak (RPL) yang memiliki minat pada pengembangan aplikasi dan teknologi. Saya memiliki pengalaman praktik kerja lapangan sebagai Junior Programmer dan Web Developer Intern, serta pernah mengikuti LKS DIY bidang Web Technologies. Saat ini, saya terus belajar, mengembangkan keterampilan pemrograman, dan memperluas pengetahuan di bidang teknologi melalui perkuliahan maupun proyek.",
   },
-  tagline: "Membangun aplikasi web yang rapi, cepat, dan scalable.",
-  location: "Indonesia",
+  tagline: "Terus belajar, berkembang, dan membangun solusi melalui teknologi.",
+  location: "Gunungkidul, Yogyakarta, Indonesia",
   avatar: {
     src: "/file.svg",
-    alt: "Firstha Noventia",
+    alt: "Firstha Noventia Sari",
   },
   socials: [
     {

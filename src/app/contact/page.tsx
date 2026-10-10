@@ -1,4 +1,3 @@
-// src/app/contact/page.tsx
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ContactContent } from "@/components/sections/ContactContent";
 
@@ -9,7 +8,7 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white dark:bg-slate-950">
       <section className="max-w-6xl mx-auto px-6 pt-16 pb-24">
         <PageHeader
           eyebrow="Contact"
