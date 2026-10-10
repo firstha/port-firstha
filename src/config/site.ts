@@ -10,7 +10,7 @@ export const site = {
 
   author: {
     name: "Firstha Noventia",
-    role: "Full Stack Web Developer",
+    role: "Junior Programmer",
   },
 
   keywords: [

@@ -2,7 +2,7 @@ import type { Profile } from "@/domain/types";
 
 export const profile: Profile = {
   name: "Firstha Noventia",
-  role: "Full Stack Web Developer",
+  role: "Junior Programmer",
   about: {
     headline: "Fresh Graduate SMK yang fokus pada pengembangan aplikasi web",
     description:
@@ -24,24 +24,18 @@ export const profile: Profile = {
     {
       platform: "linkedin",
       label: "LinkedIn",
-      href: "https://www.linkedin.com/in/firstha/",
+      href: "https://www.linkedin.com/in/firstha-noventia/",
       icon: "linkedin",
-    },
-    {
-      platform: "x",
-      label: "X",
-      href: "https://x.com/firstha",
-      icon: "x",
     },
     {
       platform: "email",
       label: "Email",
-      href: "mailto:hello@firsthanoven.com",
+      href: "mailto:fristhanoven@gmail.com",
     },
     {
       platform: "website",
       label: "Website",
-      href: "https://firsthanoven.com",
+      href: "https://firsthanoven.vercel.app",
     },
   ],
 };
